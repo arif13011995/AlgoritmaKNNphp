@@ -39,6 +39,10 @@ include "../admina/inc/config.php";
 	<script src="js/owl.carousel.js"></script>
 	<script src="js/animate.js" type="text/javascript"></script>
 	<script src="js/myscript.js" type="text/javascript"></script>
+	<script src="../admina/assets/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+    <script src="../admina/assets/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+    
+    <link href="../admina/assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 	
 </head>
 <body>
@@ -162,8 +166,293 @@ include "../admina/inc/config.php";
 			$jumlah_data = $sql->rowCount();
 			//echo $jumlah_data;
 			
+
+			//tabel bobot
+			?>
+
+			<div class="container">
+				  <h2>Kasus Baru</h2>
+				  <p>Data yang akan dibandingkan dengan kasus lama</p>            
+				  <table class="table table-striped">
+				    
+				    <tbody>
+				      <tr>
+				        <td>Nama</td>
+				        <td><?=$nama;?></td>
+				      </tr>
+				      <tr>
+				        <td>Pendidikan</td>
+				        <?php 
+          $dtb1 = $db->fetch_custom("select v_pendidikan from pendidikan where id = '$pendidikan'");
+          foreach ($dtb1 as $value1) {
+            ?>
+           <td><?=$value1->v_pendidikan;?></td> 
+          <?php
+          }
+         ?>
+				      </tr>
+				      <tr>
+				        <td>Umur</td>
+				        <?php 
+          $dtb1 = $db->fetch_custom("select v_umur from umur where id = '$umur'");
+          foreach ($dtb1 as $value1) {
+            ?>
+           <td><?=$value1->v_umur;?></td> 
+          <?php
+          }
+         ?>
+				      </tr>
+				      <tr>
+				        <td>Jabatan</td>
+				        <?php 
+          $dtb1 = $db->fetch_custom("select v_jabatan from jabatan where id = '$jabatan'");
+          foreach ($dtb1 as $value1) {
+            ?>
+           <td><?=$value1->v_jabatan;?></td> 
+          <?php
+          }
+         ?>
+				      </tr>
+				      <tr>
+				        <td>Jenis Kelamin</td>
+				        <?php 
+          $dtb1 = $db->fetch_custom("select v_jk from jk where id = '$jk'");
+          foreach ($dtb1 as $value1) {
+            ?>
+           <td><?=$value1->v_jk;?></td> 
+          <?php
+          }
+         ?>
+				      </tr>
+				      <tr>
+				        <td>Status Pernikahan</td>
+				        <?php 
+          $dtb1 = $db->fetch_custom("select v_statusNikah from status_nikah where id = '$status_nikah'");
+          foreach ($dtb1 as $value1) {
+            ?>
+           <td><?=$value1->v_statusNikah;?></td> 
+          <?php
+          }
+         ?>
+				      </tr>
+
+				      
+				    </tbody>
+				  </table>
+			</div>
+
+			<!-- /.hasil kedekatan -->
+		<section class="content">
+					<div class="container">
+		                    <div class="row">
+		                    <div class="col-md-1">
+		                    	
+		                    </div>
+		                        <div class="col-md-10">
+		                            <div class="box" id="box">
+		                                <div class="box-header">
+		                                  <h3 class="box-title">Data Kasus Lama </h3>
+		                                </div><!-- /.box-header -->
+		                                <div class="box-body table-responsive">
+		                                    <table id="dtb_manual" class="table table-bordered table-striped">
+		                                   		<thead>
+                                     <tr>
+                           <th style="width:25px" align="center">No</th>   
+													<th>Nama</th>
+													<th>Pendidikan</th>
+													<th>Umur</th>
+													<th>Jabatan</th>
+													<th>Jenis Kelamin</th>
+													<th>Status Pernikahan</th>
+													<th>Terlibat Korupsi</th>
+                        			</tr>
+                                      </thead>
+		                                        <tbody>
+
+		                                         <?php 
 			//inisialisasi semua nilai kedekatan dari tabel sample
-			$sqlKedekatan = $db->fetch_custom("select pendidikan, umur, jabatan, jk, status_nikah, keterlibatan from sample");
+			$sqlKedekatan1 = $db->fetch_custom("select nama, pendidikan, umur, jabatan, jk, status_nikah, keterlibatan from sample");
+			$i=1;
+			foreach ($sqlKedekatan1 as $valueKedekatan1) {
+				 ?>
+				 <tr>
+				<td><?=$i;?></td>
+				<td><?=$valueKedekatan1->nama;?></td>
+				<?php 
+          $dtb1 = $db->fetch_custom("select v_pendidikan from pendidikan where id = '$valueKedekatan1->pendidikan'");
+          foreach ($dtb1 as $value1) {
+            ?>
+           <td><?=$value1->v_pendidikan;?></td> 
+          <?php
+          }
+         ?>
+
+         <?php 
+          $dtb1 = $db->fetch_custom("select v_umur from umur where id = '$valueKedekatan1->umur'");
+          foreach ($dtb1 as $value1) {
+            ?>
+           <td><?=$value1->v_umur;?></td> 
+          <?php
+          }
+         ?>
+
+         <?php 
+          $dtb1 = $db->fetch_custom("select v_jabatan from jabatan where id = '$valueKedekatan1->jabatan'");
+          foreach ($dtb1 as $value1) {
+            ?>
+           <td><?=$value1->v_jabatan;?></td> 
+          <?php
+          }
+         ?>
+
+         <?php 
+          $dtb1 = $db->fetch_custom("select v_jk from jk where id = '$valueKedekatan1->jk'");
+          foreach ($dtb1 as $value1) {
+            ?>
+           <td><?=$value1->v_jk;?></td> 
+          <?php
+          }
+         ?>
+
+         <?php 
+          $dtb1 = $db->fetch_custom("select v_statusNikah from status_nikah where id = '$valueKedekatan1->status_nikah'");
+          foreach ($dtb1 as $value1) {
+            ?>
+           <td><?=$value1->v_statusNikah;?></td> 
+          <?php
+          }
+         ?>
+
+         <?php 
+          $dtb1 = $db->fetch_custom("select v_keterlibatan from keterlibatan where id = '$valueKedekatan1->keterlibatan'");
+          foreach ($dtb1 as $value1) {
+            ?>
+           <td><?=$value1->v_keterlibatan;?></td> 
+		        <?php
+		    }
+		    ?>
+		    </tr>
+		    <?php
+		        $i++;
+		      }
+		      ?>
+		      
+		                                        </tbody>
+		                                    </table>
+		                                </div><!-- /.box-body -->
+		                            </div><!-- /.box -->
+		                        </div>
+		                        <div class="col-md-1">
+		                    	
+		                    </div>
+		                    </div>
+		                    </div>
+		</section>
+
+<br>
+<br>
+<br>
+<br>
+					<section class="content">
+					<div class="container">
+		                    <div class="row">
+		                    <div class="col-md-3">
+		                    	
+		                    </div>
+		                        <div class="col-md-6">
+		                            <div class="box" id="box">
+		                                <div class="box-header">
+		                                  <h3 class="box-title">Bobot Atribut</h3>
+		                                </div><!-- /.box-header -->
+		                                <div class="box-body table-responsive">
+		                                    <table id="dtb_manual" class="table table-bordered table-striped">
+		                                   
+		                                        <tbody>
+
+		                                         <?php 
+		      $dtb=$db->fetch_custom("select b_pendidikan, b_umur, b_jabatan, b_jk, b_statusNikah from bobot");
+
+		      $i=1;
+		      foreach ($dtb as $isi) {
+		        ?>
+		        <tr>
+		        	<td>Pendidikan</td>
+		        	<td><?=$isi->b_pendidikan;?></td>
+		        </tr>
+		        <tr>
+		        	<td>Umur</td>
+		        	<td><?=$isi->b_umur;?></td>
+		        </tr>
+		        <tr>
+		        	<td>Jabatan</td>
+		        	<td><?=$isi->b_jabatan;?></td>
+		        </tr>
+		        <tr>
+		        	<td>Jenis Kelamin</td>
+		        	<td><?=$isi->b_jk;?></td>
+		        </tr>
+		        <tr>
+		        	<td>Status Pernikahan</td>
+		        	<td><?=$isi->b_statusNikah;?></td>
+		        </tr>
+		        <?php
+		        $i++;
+		      }
+		      ?>
+		      
+		                                        </tbody>
+		                                    </table>
+		                                </div><!-- /.box-body -->
+		                            </div><!-- /.box -->
+		                        </div>
+		                        <div class="col-md-3">
+		                    	
+		                    </div>
+		                    </div>
+		                    </div>
+
+
+		</section>
+		
+
+
+
+
+		<br>
+		<br>
+		<br>
+		<br>
+		<!-- /.hasil kedekatan -->
+		<section class="content">
+					<div class="container">
+		                    <div class="row">
+		                    <div class="col-md-1">
+		                    	
+		                    </div>
+		                        <div class="col-md-10">
+		                            <div class="box" id="box">
+		                                <div class="box-header">
+		                                  <h3 class="box-title">Kedekatan Kasus Baru Dengan Semua Kasus </h3>
+		                                </div><!-- /.box-header -->
+		                                <div class="box-body table-responsive">
+		                                    <table id="dtb_manual" class="table table-bordered table-striped">
+		                                   		<thead>
+                                     <tr>
+                           <th style="width:25px" align="center">No</th>   
+													<th>Nama</th>
+													<th>Pendidikan</th>
+													<th>Umur</th>
+													<th>Jabatan</th>
+													<th>Jenis Kelamin</th>
+													<th>Status Pernikahan</th>
+													<th>Jarak/Hasil Perhitungan</th>
+                        			</tr>
+                                      </thead>
+		                                        <tbody>
+
+		                                         <?php 
+			//inisialisasi semua nilai kedekatan dari tabel sample
+			$sqlKedekatan = $db->fetch_custom("select nama, pendidikan, umur, jabatan, jk, status_nikah, keterlibatan from sample");
 			$i=1;
 			foreach ($sqlKedekatan as $valueKedekatan) {
 				if ($valueKedekatan->pendidikan==$pendidikan){
@@ -171,9 +460,7 @@ include "../admina/inc/config.php";
 				}else{
 					$kedekatanPendidikanBaru[$i] = $kedekatan_pendidikan;
 				}
-				//echo $valueKedekatan->pendidikan;
-				//echo $kedekatanPendidikanBaru[$i];
-
+				
 				if ($valueKedekatan->umur==$umur){
 						$kedekatanUmurBaru[$i] = 1;
 				}else{
@@ -199,22 +486,36 @@ include "../admina/inc/config.php";
 				}
 
 				 $hasil[$i] = ((Getfloat($kedekatanPendidikanBaru[$i])*Getfloat($bobot_pendidikan))+(Getfloat($kedekatanUmurBaru[$i])*Getfloat($bobot_umur))+(Getfloat($kedekatanJabatanBaru[$i])*Getfloat($bobot_jabatan))+(Getfloat($kedekatanJkBaru[$i])*Getfloat($bobot_jk))+(Getfloat($kedekatanStatusNikahBaru[$i])*Getfloat($bobot_statusNikah)))/(Getfloat($bobot_pendidikan)+Getfloat($bobot_jabatan)+Getfloat($bobot_umur)+Getfloat($bobot_jk)+Getfloat($bobot_statusNikah));
-				echo $hasil[$i];
-				echo '<br>';
-				$i++;
-			}
+				 ?>
+				 <tr>
+				<td><?=$i;?></td>
+				<td><?=$valueKedekatan->nama;?></td>
+				<td><?=$kedekatanPendidikanBaru[$i];?></td>
+				<td><?=$kedekatanUmurBaru[$i];?></td>
+				<td><?=$kedekatanJabatanBaru[$i];?></td>
+				<td><?=$kedekatanJkBaru[$i];?></td>
+				<td><?=$kedekatanStatusNikahBaru[$i];?></td>
+				<td><?=$hasil[$i];?></td>
+				</tr>
+		        <?php
+		        $i++;
+		      }
+		      ?>
+		      
+		                                        </tbody>
+		                                    </table>
+		                                </div><!-- /.box-body -->
+		                            </div><!-- /.box -->
+		                        </div>
+		                        <div class="col-md-1"> </div>
+		                    </div>
+		                    </div>
+
+
+		</section>
 				
 
 			
-
-			//hitung semua hasil
-			for($j=1; $j<=$jumlah_data; $j++){
-			 // $hasil[$j] = ((Getfloat($kedekatanPendidikanBaru[$j])*Getfloat($bobot_pendidikan))+(Getfloat($kedekatanUmurBaru[$j])*Getfloat($bobot_umur))+(Getfloat($kedekatanJabatanBaru[$j])*Getfloat($bobot_jabatan))+(Getfloat($kedekatanJkBaru[$j])*Getfloat($bobot_jk))+(Getfloat($kedekatanStatusNikahBaru[$j])*Getfloat($bobot_statusNikah)))/(Getfloat($bobot_pendidikan)+Getfloat($bobot_jabatan)+Getfloat($bobot_umur)+Getfloat($bobot_jk)+Getfloat($bobot_statusNikah));
-			//	echo $hasil[$j];		
-			}
-
-
-			 ?>
 			
 		</section><!-- //BLOG -->
 	</div><!-- //PAGE -->
@@ -229,7 +530,19 @@ include "../admina/inc/config.php";
 			
 		
 	</footer><!-- //FOOTER -->
-	
+	<script type="text/javascript">
+      $(function () {
+        $("#dtb_manual").dataTable();
+        $('#example2').dataTable({
+          "bPaginate": true,
+          "bLengthChange": false,
+          "bFilter": false,
+          "bSort": true,
+          "bInfo": true,
+          "bAutoWidth": false
+        });
+      });
+    </script>
 	
 	
 
