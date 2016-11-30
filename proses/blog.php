@@ -422,6 +422,78 @@ include "../admina/inc/config.php";
 		<br>
 		<br>
 		<br>
+
+
+
+				<section class="content">
+					<div class="container">
+		                    <div class="row">
+		                    <div class="col-md-3">
+		                    	
+		                    </div>
+		                        <div class="col-md-6">
+		                            <div class="box" id="box">
+		                                <div class="box-header">
+		                                  <h3 class="box-title">Nilai Kedekatan</h3>
+		                                </div><!-- /.box-header -->
+		                                <div class="box-body table-responsive">
+		                                    <table id="dtb_manual" class="table table-bordered table-striped">
+		                                   
+		                                        <tbody>
+
+		                                         <?php 
+		      $dtb=$db->fetch_custom("select k_pendidikan, k_umur, k_jabatan, k_jk, k_status from kedekatan");
+
+		      $i=1;
+		      foreach ($dtb as $isi) {
+		        ?>
+		        <tr>
+		        	<td>Pendidikan</td>
+		        	<td><?=$isi->k_pendidikan;?></td>
+		        </tr>
+		        <tr>
+		        	<td>Umur</td>
+		        	<td><?=$isi->k_umur;?></td>
+		        </tr>
+		        <tr>
+		        	<td>Jabatan</td>
+		        	<td><?=$isi->k_jabatan;?></td>
+		        </tr>
+		        <tr>
+		        	<td>Jenis Kelamin</td>
+		        	<td><?=$isi->k_jk;?></td>
+		        </tr>
+		        <tr>
+		        	<td>Status Pernikahan</td>
+		        	<td><?=$isi->k_status;?></td>
+		        </tr>
+		        <?php
+		        $i++;
+		      }
+		      ?>
+		      
+		                                        </tbody>
+		                                    </table>
+		                                </div><!-- /.box-body -->
+		                            </div><!-- /.box -->
+		                        </div>
+		                        <div class="col-md-3">
+		                    	
+		                    </div>
+		                    </div>
+		                    </div>
+
+
+		</section>
+		
+
+
+
+
+		<br>
+		<br>
+		<br>
+		<br>
 		<!-- /.hasil kedekatan -->
 		<section class="content">
 					<div class="container">
@@ -435,7 +507,7 @@ include "../admina/inc/config.php";
 		                                  <h3 class="box-title">Kedekatan Kasus Baru Dengan Semua Kasus </h3>
 		                                </div><!-- /.box-header -->
 		                                <div class="box-body table-responsive">
-		                                    <table id="dtb_manual" class="table table-bordered table-striped">
+		                                    <table id="dtb_manual1" class="table table-bordered table-striped">
 		                                   		<thead>
                                      <tr>
                            <th style="width:25px" align="center">No</th>   
@@ -541,6 +613,18 @@ include "../admina/inc/config.php";
 	<script type="text/javascript">
       $(function () {
         $("#dtb_manual").dataTable();
+        $('#example2').dataTable({
+          "bPaginate": true,
+          "bLengthChange": false,
+          "bFilter": false,
+          "bSort": true,
+          "bInfo": true,
+          "bAutoWidth": false
+        });
+      });
+
+      $(function () {
+        $("#dtb_manual1").dataTable();
         $('#example2').dataTable({
           "bPaginate": true,
           "bLengthChange": false,
